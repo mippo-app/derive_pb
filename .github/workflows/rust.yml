@@ -52,6 +52,20 @@ jobs:
             os: macos-latest
             
     runs-on: ${{ matrix.os }}
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      discussions: write
+      packages: write
+      pages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     steps:
     - uses: actions/checkout@v4
     - name: prepare
