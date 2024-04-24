@@ -58,7 +58,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.AAA }}
       run: |
-        git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/yoffa-app/helper.git
         git config --global url."https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/yoffa-app/".insteadOf "https://github.com/yoffa-app/"
     - name: Build
       run: cargo build --release --verbose
