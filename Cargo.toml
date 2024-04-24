@@ -21,8 +21,10 @@ quote = "1"
 proc-macro2 = "1"
 uuid = "1"
 # framework = { path = "/Users/tatsuyasen/git/framework/apps/rust/framework/"}
-helper = { path = "../helper/"}
+# helper = { path = "../helper/"}
 # helper = { git = "https://source.developers.google.com/p/hapii-project/r/framework", branch = "master" }
+helper = { git = "https://github.com/yoffa-app/helper.git", branch = "main" }
+
 
 
 [profile.release]
