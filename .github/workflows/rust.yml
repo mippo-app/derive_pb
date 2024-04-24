@@ -1,0 +1,67 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      sha_short: ${{ steps.vars.outputs.sha_short }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set outputs
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+    - name: Check outputs
+      run: echo ${{ steps.vars.outputs.sha_short }}
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.vars.outputs.sha_short }}
+        release_name: Release ${{ steps.vars.outputs.sha_short }}
+        draft: false
+        prerelease: false
+  build:
+    name: Build release
+    needs: create_release
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+          # - x86_64-pc-windows-msvc
+          - x86_64-apple-darwin
+        include:
+          - target: x86_64-unknown-linux-musl
+            os: ubuntu-latest
+          # - target: x86_64-pc-windows-msvc
+          #   os: windows-latest
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build --release --verbose
+    # - name: Run tests
+    #   run: cargo test --verbose
+    - name: move
+      run: mv target/release/libdrive_pb.rlib target/release/libdrive_pb-${{ matrix.target }}.rlib
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ needs.create_release.outputs.sha_short }}
+        files: |
+          target/release/libdrive_pb-${{ matrix.target }}.rlib
