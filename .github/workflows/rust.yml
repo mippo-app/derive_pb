@@ -65,10 +65,10 @@ jobs:
     # - name: Run tests
     #   run: cargo test --verbose
     - name: move
-      run: mv target/release/libdrive_pb.rlib target/release/libdrive_pb-${{ matrix.target }}.rlib
+      run: mv target/release/libderive_pb.rlib target/release/libderive_pb-${{ matrix.target }}.rlib
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ needs.create_release.outputs.sha_short }}
         files: |
-          target/release/libdrive_pb-${{ matrix.target }}.rlib
+          target/release/libderive_pb-${{ matrix.target }}.rlib
