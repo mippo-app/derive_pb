@@ -56,7 +56,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: prepare
       env:
-        GITHUB_TOKEN: ${{ secrets.AAA }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global url."https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/yoffa-app/".insteadOf "https://github.com/yoffa-app/"
     - name: Build
