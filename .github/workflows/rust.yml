@@ -68,10 +68,10 @@ jobs:
       run: |
         ls target/
         ls target/release/
-        mv target/release/libderive_pb.rlib target/release/libderive_pb-${{ matrix.target }}.rlib
+        mv target/release/libderive_pb.dylib target/release/libderive_pb-${{ matrix.target }}.dylib
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ needs.create_release.outputs.sha_short }}
         files: |
-          target/release/libderive_pb-${{ matrix.target }}.rlib
+          target/release/libderive_pb-${{ matrix.target }}.dylib
