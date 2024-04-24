@@ -54,11 +54,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
-    # - name: prepare
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: |
-    #     git config --global url."https://x-access-token:$GITHUB_TOKEN@github.com/yoffa-app/".insteadOf git@github.com:org-name/
+    - name: prepare
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global url."https://x-access-token:$GITHUB_TOKEN@github.com/yoffa-app/".insteadOf "https://github.com/yoffa-app/"
     - name: Build
       run: cargo build --release --verbose
     # - name: Run tests
