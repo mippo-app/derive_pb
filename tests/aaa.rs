@@ -7,6 +7,7 @@ fn test_macro() {
     pub struct pb_MantleType {
         pub valueof: Option<pb_Valueof>,
     }
+
     /// Nested message and enum types in `MInfoType`.
     pub enum pb_Valueof {
         Sand(Sand),
