@@ -1,0 +1,29 @@
+[package]
+name = "derive_pb"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+proc-macro = true
+
+[[test]]
+name = "tests"
+path = "tests/progress.rs"
+
+[dev-dependencies]
+trybuild = { version = "1", features = ["diff"] }
+
+[dependencies]
+syn = {version = "2", features = ["extra-traits"]}
+quote = "1"
+proc-macro2 = "1"
+uuid = "1"
+# framework = { path = "/Users/tatsuyasen/git/framework/apps/rust/framework/"}
+helper = { path = "../helper/"}
+# helper = { git = "https://source.developers.google.com/p/hapii-project/r/framework", branch = "master" }
+
+
+[profile.release]
+debug = true
