@@ -65,11 +65,26 @@ jobs:
     # - name: Run tests
     #   run: cargo test --verbose
     - name: move
+      if: matrix.target == 'x86_64-unknown-linux-musl'
+      run: |
+        ls target/
+        ls target/release/
+        mv target/release/libderive_pb.so target/release/libderive_pb-${{ matrix.target }}.so
+    - name: Release
+      if: matrix.target == 'x86_64-unknown-linux-musl'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ needs.create_release.outputs.sha_short }}
+        files: |
+          target/release/libderive_pb-${{ matrix.target }}.so
+    - name: move
+      if: matrix.target == 'x86_64-apple-darwin'
       run: |
         ls target/
         ls target/release/
         mv target/release/libderive_pb.dylib target/release/libderive_pb-${{ matrix.target }}.dylib
     - name: Release
+      if: matrix.target == 'x86_64-apple-darwin'
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ needs.create_release.outputs.sha_short }}
