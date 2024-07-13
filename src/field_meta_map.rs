@@ -11,7 +11,9 @@ impl FieldMetaMap {
     pub fn new_from(variants: &Vec<&syn::Variant>) -> Self {
         let mut field_meta_map = HashMap::new();
         for variant in variants.iter() {
+            println!("{:?}", variant);
             for attr in variant.attrs.iter() {
+                println!("{:?}", attr);
                 let hhh = meta_to_hashmap(attr).unwrap();
 
                 field_meta_map.insert(variant.ident.clone().to_string(), hhh);
@@ -57,12 +59,12 @@ pub fn meta_to_hashmap(attr: &syn::Attribute) -> Result<HashMap<String, String>,
     attr.parse_nested_meta(|meta| {
         for path in &meta.path.segments {
             let k = path.ident.to_string();
-            // eprintln!("key: {:?}", k);
+            eprintln!("key: {:?}", k);
 
             let value = meta.value()?;
             let s: LitStr = value.parse()?;
             let v = s.value();
-            // eprintln!("value: {:?}", v);
+            eprintln!("value: {:?}", v);
 
             r.insert(k, v);
         }

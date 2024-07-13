@@ -16,14 +16,13 @@ path = "tests/progress.rs"
 trybuild = { version = "1", features = ["diff"] }
 
 [dependencies]
-syn = {version = "2", features = ["extra-traits"]}
+# syn = {version = "2", features = ["extra-traits"]}
+syn = {version = "2", features = ["full", "extra-traits"]}
 quote = "1"
 proc-macro2 = "1"
 uuid = "1"
-# framework = { path = "/Users/tatsuyasen/git/framework/apps/rust/framework/"}
-# helper = { path = "../helper/"}
-# helper = { git = "https://source.developers.google.com/p/hapii-project/r/framework", branch = "master" }
-helper = { git = "https://github.com/yoffa-app/helper.git", branch = "main" }
+
+helper = { git = "https://github.com/mippo-app/helper.git", branch = "main" }
 
 
 

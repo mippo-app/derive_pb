@@ -35,41 +35,34 @@ fn test_macro2() {
         pub struct pb_Uuid {
             pub target_type: String,
 
-            pub uuid: ::core::option::Option<String>,
+            pub uuid: Option<String>,
         }
 
         pub struct pb_Id {
-            pub value_of: ::core::option::Option<pb_id::ValueOf>,
+            pub valueof: Option<ValueOf>,
         }
         /// Nested message and enum types in `ID`.
-        pub mod pb_id {
-            pub enum ValueOf {
-                Uuid(super::pb_Uuid),
-            }
+        pub enum pb_Valueof {
+            Uuid(pb_Uuid),
         }
 
         #[derive(Pb)]
         #[pb(pb_name = "pb_Uuid")]
         pub struct Uuid {
             pub target_type: String,
-            pub uuid: ::core::option::Option<String>,
+            pub uuid: Option<String>,
         }
 
-        pub mod id {
-            use super::pb_id::ValueOf as pb_ValueOf;
-            use derive_pb::Pb;
-
-            #[derive(Pb)]
-            #[pb(pb_name = "pb_ValueOf")]
-            pub enum ValueOf {
-                Uuid(super::pb_Uuid),
-            }
+        #[derive(Pb)]
+        #[pb(pb_name = "pb_Valueof")]
+        pub enum ValueOf {
+            Uuid(pb_Uuid),
         }
 
         #[derive(Pb)]
         #[pb(pb_name = "pb_Id")]
         pub struct Id {
-            pub value_of: Option<id::ValueOf>,
+            pub valueof: Option<ValueOf>,
         }
     }
 

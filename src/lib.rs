@@ -1,5 +1,7 @@
 extern crate proc_macro;
 
+mod a_enum;
+mod a_struct;
 mod field_attr;
 mod field_meta_map;
 mod utils;
@@ -71,7 +73,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     }) = &ast.data
     {
         println!("struct");
-        let struct_info = utils::StructInfo::new(&ast);
+        let struct_info = a_struct::StructInfo::new(&ast);
 
         let a = quote! {
             #struct_info
@@ -82,7 +84,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
         return TokenStream::from(a);
     } else if let syn::Data::Enum(aaa) = &ast.data {
         println!("Enum");
-        let enum_info = utils::EnumInfo::new(&ast);
+        let enum_info = a_enum::EnumInfo::new(&ast);
 
         let a = quote! {
             #enum_info

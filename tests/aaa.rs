@@ -3,6 +3,7 @@ use derive_pb::Pb;
 #[test]
 fn test_macro() {
     // cargo test --test aaa -- test_macro --nocapture
+    // cargo expand --test aaa -- test_macro
 
     pub struct pb_MantleType {
         pub valueof: Option<pb_Valueof>,
@@ -12,6 +13,7 @@ fn test_macro() {
     pub enum pb_Valueof {
         Sand(Sand),
         Stone(Stone),
+        Temp(u32),
     }
 
     #[derive(Pb)]
@@ -20,6 +22,7 @@ fn test_macro() {
     pub enum MantleType {
         Sand(Sand),
         Stone(Stone),
+        Temp(u32),
     }
 
     struct pb_Sand {
@@ -47,5 +50,4 @@ fn test_macro() {
     }
 
     // assert_eq!(Hoge::hello_macro(), "A".to_string());
-    // cargo expand --test aaa -- test_macro
 }

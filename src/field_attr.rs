@@ -1,5 +1,7 @@
 use super::FieldMetaMap;
 
+#[derive(Clone)]
+
 pub struct VariantAttr {
     pub is_skip: bool,
     pub type_vec: Vec<proc_macro2::Ident>,
@@ -11,6 +13,7 @@ pub struct VariantAttr {
 impl VariantAttr {
     pub fn new(f: &syn::Variant, field_meta_map: &FieldMetaMap) -> Self {
         let field_name = f.ident.clone().to_string();
+        println!("{:?}", field_name);
 
         let is_skip = if let Some(_skip) =
             field_meta_map.get_value(field_name.clone(), String::from("skip"))
@@ -26,6 +29,8 @@ impl VariantAttr {
                 type_vec = get_type_vec(&named[0]);
             }
         }
+
+        println!("{:?}", type_vec);
 
         let from_pb_func_name =
             field_meta_map.get_value(field_name.clone(), String::from("from_pb_func_name"));
