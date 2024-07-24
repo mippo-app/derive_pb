@@ -12,7 +12,7 @@ pub fn get_target_info(
 ) -> (proc_macro2::Ident, proc_macro2::Ident, String, bool) {
     let name = &ast.ident;
     let mut pb_name = String::from("");
-    let mut module_path = String::from("helper");
+    let mut module_path = String::from("m_helper");
     let mut is_pure_enum = false;
     let mut is_primitive = false;
 
