@@ -6,6 +6,8 @@ edition = "2021"
 description = "derive macro for proto"
 license = "MIT OR Apache-2.0"
 
+repository = "https://github.com/mippo-app/derive_pb"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
