@@ -1,7 +1,10 @@
 [package]
 name = "derive_pb"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+
+description = "derive macro for proto"
+license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -22,7 +25,7 @@ quote = "1"
 proc-macro2 = "1"
 uuid = "1"
 
-helper = { git = "https://github.com/mippo-app/helper.git", branch = "main" }
+m-helper = "~0"
 
 
 
